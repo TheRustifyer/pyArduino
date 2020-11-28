@@ -1,6 +1,6 @@
 import serial as pySerial
 from serial.tools import list_ports
-
+import pyfirmata
 
 class AutoSetUp:
 
@@ -31,12 +31,10 @@ class AutoSetUp:
             
             str_port = str(port)
             
-            if 'Arduino' in str_port or 'USB-SERIAL CH340' in str_port: 
+            if 'Arduino' in str_port or 'USB-SERIAL CH340' in str_port: #Check for more Chinese motherboards
                 
                 splitted_str_port = str_port.split(' ')
-                (f'Soy el port de autoconnect_board y mi valor es {com_port}')
                 com_port = (splitted_str_port[0])
-                print
 
         return com_port
             
@@ -48,16 +46,19 @@ class AutoSetUp:
         if connect_to_port != 'None':
 
             try:
-            
+                
                 pySerial.Serial(connect_to_port, baudrate = 9600, timeout=1)
-            
+
                 print(f'Connected to {connect_to_port} succesfully!')
 
             except IOError as error:
 
-                raise RuntimeError(f'''Was an attempting to connect to your board.\n'
-                                                Please, secure your instalation and try again.\n
+                raise RuntimeError(f'''Can't not open a connection to your board.\n'
+                                                Please, verify your set up and try again.\n
                                                 {error}''')
 
         self.port = connect_to_port
 
+        self.board = pyfirmata.Arduino(self.port) #Firmata Board instance (Arduino inherits from Board)
+
+        return self.board

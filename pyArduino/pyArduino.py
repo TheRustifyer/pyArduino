@@ -9,7 +9,9 @@ class AutoSetUp:
     def __init__(self):
 
         self.port = None
+        
         self.total_finded_ports = []
+        
         self.my_serial = None
 
     def found_ports(self):
@@ -20,24 +22,35 @@ class AutoSetUp:
 
             self.total_finded_ports.append(port)
 
-        return self.ports
+        return len(self.ports)
 
 
-    def find_board(self, founded_ports):
+    def find_board(self, founded_ports=0):
+
+        if founded_ports == 0:
+
+            try:
+
+                founded_ports = self.found_ports()
+
+                if founded_ports != 0:
         
-        com_port = 'None'
-        num_founded_ports = len(founded_ports)
-        
-        for num in range(0, num_founded_ports):
+                    com_port = 'None'
+                    
+                    for num in range(0, founded_ports):
+                        
+                        port = self.ports[num]
+                        
+                        str_port = str(port)
+                        
+                        if 'Arduino' in str_port or 'USB-SERIAL CH340' in str_port: #Check for more Chinese motherboards
+                            
+                            splitted_str_port = str_port.split(' ')
+                            com_port = (splitted_str_port[0])
             
-            port = self.ports[num]
-            
-            str_port = str(port)
-            
-            if 'Arduino' in str_port or 'USB-SERIAL CH340' in str_port: #Check for more Chinese motherboards
-                
-                splitted_str_port = str_port.split(' ')
-                com_port = (splitted_str_port[0])
+            except IOError as error:
+
+                print(f'No port with board founded.\n{error}')
 
         return com_port
             
@@ -54,7 +67,7 @@ class AutoSetUp:
 
                 print(f'Connected to {connect_to_port} succesfully!')
 
-                self.my_serial = pySerial.Serial.close(connect_to_port)
+                self.my_serial.close()
 
             except IOError as error:
 

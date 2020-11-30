@@ -14,23 +14,24 @@ class LCD(pyArduino.AutoSetUp):
     #No vaya a ser que me caiga esto a pique
     _BUFFER_WAIT = 0.5 #Do not ERASE or set to 0
 
-
-    ser = serial.Serial('/COM5', 9600)
+    # port = None
+    # ser = serial.Serial(port, 9600)
 
     def __init__(self, *args, **kwargs):
 
-        pass
-
+        self.port = pyArduino.AutoSetUp().find_board()
+        self.ser = serial.Serial(self.port)
+    
     def lcd_init(self):
     
     # Initialise display
-        LCD.ser.write(str.encode("clear_lcd"))
+        self.ser.write(str.encode("clear_lcd"))
         time.sleep(2)
 
     def lcd_clear(self):
         '''Clear screen from previous bytecode'''
         
-        LCD.ser.write(str.encode("clear_lcd"))
+        self.ser.write(str.encode("clear_lcd"))
         time.sleep(LCD._BUFFER_WAIT)
 
 
@@ -39,7 +40,7 @@ class LCD(pyArduino.AutoSetUp):
         
         message = message.ljust(LCD.LCD_WIDTH," ")
         encoded_msg = f'{message},{str(line)}'.encode()
-        LCD.ser.write(bytes(encoded_msg))
+        self.ser.write(bytes(encoded_msg))
         time.sleep(LCD._BUFFER_WAIT) 
 
 if __name__ == '__main__':

@@ -2,3 +2,5 @@
 Arduíno_to_C++/
 arduinoLedblink.py
 __pycache__/
+build/
+pyArduino_ALEX_VERGARA.egg-info/

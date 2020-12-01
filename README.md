@@ -1,9 +1,9 @@
 # pyArduino
 
-[![PyPI License](https://img.shields.io/pypi/l/pyArduino)
-[![PyPI version](https://img.shields.io/pypi/v/pyArduino)
+![PyPI License](https://img.shields.io/pypi/l/pyArduino)
+![PyPI version](https://img.shields.io/pypi/v/pyArduino)
 
-Welcome to the implementation of Python for as handler for Arduino data.
+Welcome to the implementation of PyArduino on Python as handler for Arduino boards.
 
 ## Description
 

@@ -5,10 +5,10 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="pyArduino", # Replace with your own username
-    version="0.1.0",
+    version="0.2.2",
     author="Alex Vergara",
     author_email="pyryzyab@tutanota.com",
-    description="Python module to handle Arduino comunication",
+    description="Python module to handle Arduino port serial comunication",
     long_description=long_description,
     long_description_content_type="text/markdown",
     packages=setuptools.find_packages(),

@@ -1,5 +1,8 @@
 # pyArduino
 
+[![PyPI License](https://img.shields.io/pypi/l/pyArduino)
+[![PyPI version](https://img.shields.io/pypi/v/pyArduino)
+
 Welcome to the implementation of Python for as handler for Arduino data.
 
 ## Description
@@ -18,7 +21,8 @@ This package allows you to automate several things:
 
 You can now use the implemented classes for friendly manage your board from Python.
 At 01(day)/12(month)/2020, when package it's released on his 0.1.0 version,
-you can send data to a 16x2 LCD Screen, being able to send strings to it throught a buffer.
+you can send data to a 16x2 LCD Screen, being able to send strings to it throught a buffer as main feature, or get data and OPEN and CLOSE serial ports
+or autodetect whenever Arduino (or a copy of him it's connected.)
 
 ## Download
 
@@ -38,7 +42,7 @@ You have a folder inside project's folder called 'examples', with current up-to-
 ### Little example
 
 
- <!-- if __name__ == '__main__':
+if __name__ == '__main__':
     
     # 1st instanciate the ShowConnectionInfo Class, which autoconnect your board via Serial module
     # due to inheritance properties, and will give you a full review of your board capabilities.
@@ -52,7 +56,7 @@ You have a folder inside project's folder called 'examples', with current up-to-
 
     # if you need to get for your software how many pins you have without hardcoring the number  
     total_pins = info.board_number_pins()
-    print(total_pins) -->
+    print(total_pins)
 
 
 ## Contributing
@@ -62,3 +66,8 @@ Please make sure to update tests as appropriate.
 
 ## License
 [MIT](https://github.com/Pyzyryab/pyArduino/blob/master/LICENSE)
+
+# Credits
+
+Libraries used here for build this project are pyfirmata and pyserial, so thanks to his
+creators for his hard work.

@@ -54,7 +54,7 @@ if __name__ == '__main__':
 
     finally:
 
-        my_lcd.lcd_write("Hola Luz e Andre",LCD.SCREEN_LINE_1)
-        my_lcd.lcd_write("Son o Alex!",LCD.SCREEN_LINE_2)
+        my_lcd.lcd_write("TEXT1",LCD.SCREEN_LINE_1)
+        my_lcd.lcd_write("TEXT2",LCD.SCREEN_LINE_2)
 
        

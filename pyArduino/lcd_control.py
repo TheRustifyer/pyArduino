@@ -42,19 +42,6 @@ class LCD(pyArduino.AutoSetUp):
         self.ser.write(bytes(encoded_msg))
         time.sleep(LCD._BUFFER_WAIT) 
 
-if __name__ == '__main__':
 
-    try:
-        my_lcd = LCD()
-        my_lcd.lcd_init()
-
-    except KeyboardInterrupt:
-
-        pass
-
-    finally:
-
-        my_lcd.lcd_write("TEXT1",LCD.SCREEN_LINE_1)
-        my_lcd.lcd_write("TEXT2",LCD.SCREEN_LINE_2)
 
        

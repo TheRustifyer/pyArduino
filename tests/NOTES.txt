@@ -1,0 +1,3 @@
+Tests will remain marked as future enhacement due to personal time issues.
+
+If someone wanna contribute and made some unitests for fun are welcome!

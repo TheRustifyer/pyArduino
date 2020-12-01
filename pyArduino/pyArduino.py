@@ -12,7 +12,7 @@ class AutoSetUp:
         
         self.total_finded_ports = []
         
-        self.my_serial = None
+        # self.my_serial = None
 
     def found_ports(self):
 

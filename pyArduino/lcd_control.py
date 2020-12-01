@@ -5,17 +5,16 @@ import pyArduino
 
 class LCD(pyArduino.AutoSetUp):
 
-        # Define some device constants
-    LCD_WIDTH = 16    # Maximum characters per line
+    # Define some device constants
+    SCREEN_WIDTH = 16  # Maximum characters per line
 
-    LCD_LINE_1 = 0 # LCD RAM address for the 1st line
-    LCD_LINE_2 = 1 # LCD RAM address for the 2nd line
+    # Identifiying RAM addresses
+    SCREEN_LINE_1 = 0
+    SCREEN_LINE_2 = 1 
 
-    #No vaya a ser que me caiga esto a pique
+    #Required to not overlap buffer instructtions
     _BUFFER_WAIT = 0.5 #Do not ERASE or set to 0
 
-    # port = None
-    # ser = serial.Serial(port, 9600)
 
     def __init__(self, *args, **kwargs):
 
@@ -35,10 +34,10 @@ class LCD(pyArduino.AutoSetUp):
         time.sleep(LCD._BUFFER_WAIT)
 
 
-    def lcd_string(self, message,line):
+    def lcd_write(self, message, line):
         '''Print desired string on LCD.'''
         
-        message = message.ljust(LCD.LCD_WIDTH," ")
+        message = message.ljust(LCD.SCREEN_WIDTH," ")
         encoded_msg = f'{message},{str(line)}'.encode()
         self.ser.write(bytes(encoded_msg))
         time.sleep(LCD._BUFFER_WAIT) 
@@ -55,7 +54,7 @@ if __name__ == '__main__':
 
     finally:
 
-        my_lcd.lcd_string("Hola Luz e Andre",LCD.LCD_LINE_1)
-        my_lcd.lcd_string("Son o Alex!",LCD.LCD_LINE_2)
+        my_lcd.lcd_write("Hola Luz e Andre",LCD.SCREEN_LINE_1)
+        my_lcd.lcd_write("Son o Alex!",LCD.SCREEN_LINE_2)
 
        

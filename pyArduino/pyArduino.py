@@ -22,50 +22,52 @@ class AutoSetUp:
 
             self.total_finded_ports.append(port)
 
-        return len(self.ports)
+        return self.ports
 
 
     def find_board(self, founded_ports=0):
 
-        if founded_ports == 0:
+        try:
 
-            try:
+            founded_ports = len(self.found_ports())
 
-                founded_ports = self.found_ports()
-
-                if founded_ports != 0:
-        
-                    com_port = 'None'
+            if founded_ports != 0:
+    
+                com_port = 'None'
+                
+                for num in range(0, founded_ports):
                     
-                    for num in range(0, founded_ports):
+                    port = self.ports[num]
+                    
+                    str_port = str(port)
+                    
+                    if 'Arduino' in str_port or 'USB-SERIAL CH340' in str_port: #Check for more Chinese motherboards
                         
-                        port = self.ports[num]
-                        
-                        str_port = str(port)
-                        
-                        if 'Arduino' in str_port or 'USB-SERIAL CH340' in str_port: #Check for more Chinese motherboards
-                            
-                            splitted_str_port = str_port.split(' ')
-                            com_port = (splitted_str_port[0])
-            
-            except IOError as error:
+                        splitted_str_port = str_port.split(' ')
+                        com_port = (splitted_str_port[0])
 
-                print(f'No port with board founded.\n{error}')
+                    else:
+
+                        raise pySerial.SerialException('Cannot find compatible boards.')
+        
+        except IOError as error:
+
+            print(f'No port with board founded.\n{error}')
 
         return com_port
             
     def autoconnect_board(self):                
         
         founded_ports = self.found_ports()       
-        connect_to_port = self.find_board(founded_ports)
+        self.port = self.find_board(founded_ports)
 
-        if connect_to_port != 'None':
+        if self.port != 'None':
 
             try:
                 
-                self.my_serial = pySerial.Serial(connect_to_port, baudrate = 9600, timeout=1)
+                self.my_serial = pySerial.Serial(self.port, baudrate = 9600, timeout=1)
 
-                print(f'Connected to {connect_to_port} succesfully!')
+                print(f'Connected to {self.port} succesfully!')
 
                 self.my_serial.close()
 
@@ -74,8 +76,6 @@ class AutoSetUp:
                 raise RuntimeError(f'''Can't not open a connection to your board.\n'
                 Please, verify your set up and try again.\n
                 {error}''')
-
-        self.port = connect_to_port
 
         self.board = pyfirmata.Arduino(self.port) #Firmata Board instance (Arduino inherits from Board class)
 
@@ -161,13 +161,14 @@ class ShowConnectionInfo(AutoConnection):
         PWM ports: {pwm}
         Servo enabled?: {servo}
         Disabled Ports: {disabled}\n''')
-        
-        self.max_total_pins = max(digital)
-        return self.max_total_pins
 
     def board_number_pins(self):
         '''Method that returns an int with total board pins'''
-        return self.max_total_pins
+        targets = [self.layout['digital'], self.layout['analog'], self.layout['pwm']]
+
+        number_of_ports_by_category = [num for value in targets for num in value]
+        
+        return max(number_of_ports_by_category)
 
     def pin_status(self):
 

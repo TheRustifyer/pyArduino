@@ -12,7 +12,6 @@ class AutoSetUp:
         
         self.total_finded_ports = []
         
-        # self.my_serial = None
 
     def found_ports(self):
 
@@ -206,3 +205,5 @@ class ShowConnectionInfo(AutoConnection):
                 except:
 
                     print(f'Pin {str_number} is not connected to motherboard. \n Trying next...')
+
+

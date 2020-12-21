@@ -15,9 +15,9 @@ pyArduino it's a library on current development to allow programmers to easy han
 
 This package allows you to automate several things:
 
-1. Autodetect COM or TTY port when Arduino is detected.
+1. Autodetect COM or TTY port when Arduino is plugged on.
 2. Get info about the board, like his name, protocols, firmware versions...
-3. Handling data directly from your Python interpreter.
+3. Handling data directly from your Python interpreter over a Serial connection.
 
 ## About
 

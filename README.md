@@ -5,6 +5,8 @@
 
 Welcome to the implementation of PyArduino on Python as handler for Arduino boards.
 
+[Find it Here](https://pypi.org/project/pyArduino/0.2.2/)
+
 ## Description
 
 pyArduino it's a library on current development to allow programmers to easy handle data and actions over Arduino hardware.
